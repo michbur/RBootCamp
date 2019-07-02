@@ -1,3 +1,5 @@
+# example: how to avoid if statements
+
 df <- data.frame(id = paste0("S", 1L:3),
                  sq = c("AAATGT", "TGAATTTC", "GCCCTAT"),
                  s = c("+", "-", "+"), stringsAsFactors = FALSE)
