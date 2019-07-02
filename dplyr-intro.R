@@ -45,3 +45,7 @@ group_by(iris, Species) %>%
   summarise(mnpl = mean(norm_petal_length)) %>% 
   select(mnpl)
 
+group_by(ChickWeight, Chick) %>% 
+  filter(Time == max(Time)) %>% 
+  group_by(Diet) %>% 
+  summarise(min_weight = min(weight), max_weight = max(weight))
