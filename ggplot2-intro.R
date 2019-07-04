@@ -131,8 +131,15 @@ get_legend <- function(gg_plot) {
 }
 
 library(patchwork)
-(p_dens_sleep + get_legend(p_dens_sleep) + 
+p <- (p_dens_sleep + get_legend(p_dens_sleep) + 
     p_main + p_dens_bodywt) * theme_bw() * theme(legend.position = "none") + 
     plot_layout(ncol = 2, nrow = 2, heights = c(0.3, 0.7), widths = c(0.7, 0.3))
   
+png("plot1.png")
+p
+dev.off()
+
+cairo_ps("plot1.eps")
+p
+dev.off()
 
