@@ -88,3 +88,24 @@ ggplot(filter(msleep, vore != "insecti"), aes(x = sleep_total, y = bodywt, color
   scale_y_log10() +
   facet_wrap(~ vore, scales = "free")
 
+ggplot(msleep, aes(x = vore)) +
+  geom_bar() +
+  facet_wrap(~ order)
+
+ggplot(msleep, aes(x = sleep_total)) +
+  geom_histogram()
+
+ggplot(msleep, aes(x = sleep_total)) +
+  geom_density() 
+
+ggplot(msleep, aes(x = sleep_total, fill = vore)) +
+  geom_density(alpha = 0.2)
+
+ggplot(msleep, aes(x = sleep_total, fill = vore)) +
+  geom_density() +
+  facet_wrap(~ vore, ncol = 1)
+
+# devtools::install_github("thomasp85/patchwork")
+# http://www.gersonides.com/static/images/scat.png
+# ggplot(msleep, aes(x = sleep_total, y = bodywt)) 
+# wykresy gestosci sleep_total i bodywt, zaznaczone kolorem vore
