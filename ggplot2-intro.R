@@ -27,3 +27,64 @@ ggplot(msleep_counted, aes(x = vore, y = n, label = n)) +
 ggplot(msleep, aes(x = vore, label = ..count..)) +
   geom_bar(stat = "count") +
   geom_text(stat = "count", color = "white", vjust = 1)
+
+ggplot(msleep, aes(x = sleep_total, y = bodywt)) +
+  geom_point()
+
+ggplot(msleep, aes(x = sleep_total, y = log(bodywt))) +
+  geom_point()
+
+ggplot(msleep, aes(x = sleep_total, y = bodywt)) +
+  geom_point() +
+  scale_y_log10()
+
+ggplot(msleep, aes(x = sleep_total, y = bodywt, color = vore)) +
+  geom_point() +
+  scale_y_log10()
+
+ggplot(msleep, aes(x = sleep_total, y = bodywt, fill = vore, alpha = ..level..)) +
+  stat_density2d(geom = "polygon", color = "black", contour = TRUE) +
+  scale_y_log10()
+
+ggplot(msleep, aes(x = sleep_total, y = bodywt, fill = vore)) +
+  stat_bin_2d() +
+  scale_y_log10()
+
+ggplot(msleep, aes(x = sleep_total, y = bodywt, fill = vore)) +
+  stat_bin_hex() +
+  scale_y_log10()
+
+ggplot(msleep, aes(x = sleep_total, y = bodywt)) +
+  geom_point() +
+  geom_smooth() +
+  scale_y_log10()
+
+ggplot(filter(msleep, vore != "insecti"), aes(x = sleep_total, y = bodywt, color = vore)) +
+  geom_point() +
+  geom_smooth() +
+  scale_y_log10()
+
+ggplot(filter(msleep, vore != "insecti"), aes(x = sleep_total, y = bodywt, color = vore)) +
+  geom_point() +
+  geom_smooth() +
+  scale_y_log10() +
+  facet_wrap(~ vore)
+
+ggplot(filter(msleep, vore != "insecti"), aes(x = sleep_total, y = bodywt, color = vore)) +
+  geom_point() +
+  geom_smooth() +
+  scale_y_log10() +
+  facet_wrap(~ vore, scales = "free_y")
+
+ggplot(filter(msleep, vore != "insecti"), aes(x = sleep_total, y = bodywt, color = vore)) +
+  geom_point() +
+  geom_smooth() +
+  scale_y_log10() +
+  facet_wrap(~ vore, scales = "free_x")
+
+ggplot(filter(msleep, vore != "insecti"), aes(x = sleep_total, y = bodywt, color = vore)) +
+  geom_point() +
+  geom_smooth() +
+  scale_y_log10() +
+  facet_wrap(~ vore, scales = "free")
+
