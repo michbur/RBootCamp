@@ -143,3 +143,6 @@ cairo_ps("plot1.eps")
 p
 dev.off()
 
+# interaktywne grafiki
+library(plotly)
+ggplotly(p_main)
