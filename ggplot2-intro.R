@@ -115,11 +115,12 @@ p_main <- ggplot(msleep, aes(x = sleep_total, y = bodywt, color = vore)) +
   scale_y_log10()
 
 p_dens_sleep <- ggplot(msleep, aes(x = sleep_total, fill = vore)) +
-  geom_density(alpha = 0.2) 
+  geom_density(alpha = 0.2) +
+  scale_x_continuous("")
 
 p_dens_bodywt <- ggplot(msleep, aes(x = bodywt, fill = vore)) +
   geom_density(alpha = 0.2) +
-  scale_x_log10() +
+  scale_x_log10("") +
   coord_flip()
 
 get_legend <- function(gg_plot) {
