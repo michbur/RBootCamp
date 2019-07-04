@@ -112,19 +112,26 @@ ggplot(msleep, aes(x = sleep_total, fill = vore)) +
 
 p_main <- ggplot(msleep, aes(x = sleep_total, y = bodywt, color = vore)) +
   geom_point() +
-  scale_y_log10() +
-  theme(legend.position = "none")
+  scale_y_log10()
 
 p_dens_sleep <- ggplot(msleep, aes(x = sleep_total, fill = vore)) +
-  geom_density(alpha = 0.2) +
-  theme(legend.position = "none")
+  geom_density(alpha = 0.2) 
 
 p_dens_bodywt <- ggplot(msleep, aes(x = bodywt, fill = vore)) +
   geom_density(alpha = 0.2) +
   scale_x_log10() +
   coord_flip()
 
+get_legend <- function(gg_plot) {
+  grob_table <- ggplotGrob(gg_plot)
+  # gtable from gtable package
+  # names(grob_table[["grobs"]]) does not work!
+  grob_table[["grobs"]][[which(sapply(grob_table[["grobs"]], function(x) x[["name"]]) == "guide-box")]]
+}
 
 library(patchwork)
-p_dens_sleep + plot_spacer()+ p_main + p_dens_bodywt + plot_layout(ncol = 2, nrow = 2, heights = c(0.3, 0.7))
+(p_dens_sleep + get_legend(p_dens_sleep) + 
+    p_main + p_dens_bodywt) * theme_bw() * theme(legend.position = "none") + 
+    plot_layout(ncol = 2, nrow = 2, heights = c(0.3, 0.7), widths = c(0.7, 0.3))
+  
 
