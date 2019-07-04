@@ -109,3 +109,22 @@ ggplot(msleep, aes(x = sleep_total, fill = vore)) +
 # http://www.gersonides.com/static/images/scat.png
 # ggplot(msleep, aes(x = sleep_total, y = bodywt)) 
 # wykresy gestosci sleep_total i bodywt, zaznaczone kolorem vore
+
+p_main <- ggplot(msleep, aes(x = sleep_total, y = bodywt, color = vore)) +
+  geom_point() +
+  scale_y_log10() +
+  theme(legend.position = "none")
+
+p_dens_sleep <- ggplot(msleep, aes(x = sleep_total, fill = vore)) +
+  geom_density(alpha = 0.2) +
+  theme(legend.position = "none")
+
+p_dens_bodywt <- ggplot(msleep, aes(x = bodywt, fill = vore)) +
+  geom_density(alpha = 0.2) +
+  scale_x_log10() +
+  coord_flip()
+
+
+library(patchwork)
+p_dens_sleep + plot_spacer()+ p_main + p_dens_bodywt + plot_layout(ncol = 2, nrow = 2, heights = c(0.3, 0.7))
+
