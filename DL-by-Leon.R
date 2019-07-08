@@ -36,3 +36,22 @@ history = model %>% fit(
   batch_size = 50, 
   validation_split = 0.2
 )
+
+acc     = perf$acc %>% round(3)*100
+y_pred  = model %>% predict_classes(x_test)
+y_real  = y_test %>% apply(1,function(x){ return( which(x==1) - 1) })
+results = tibble(y_real = y_real %>% factor, y_pred = y_pred %>% factor,
+                 Correct = ifelse(y_real == y_pred,"yes","no") %>% factor)
+title = 'Performance on 10% unseen data - Feed Forward Neural Network'
+xlab  = 'Measured (Real class, as predicted by netMHCpan-4.0)'
+ylab  = 'Predicted (Class assigned by Keras/TensorFlow deep FFN)'
+results %>%
+  ggplot(aes(x = y_pred, y = y_real, colour = Correct)) +
+  geom_point() +
+  ggtitle(label = title, subtitle = paste0("Accuracy = ", acc,"%")) +
+  xlab(xlab) +
+  ylab(ylab) +
+  scale_color_manual(labels = c('No', 'Yes'),
+                     values = c('tomato','cornflowerblue')) +
+  geom_jitter() +
+  theme_bw()
