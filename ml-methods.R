@@ -21,3 +21,14 @@ ml_dat <- data.frame(et = c(rep(TRUE, 100), rep(FALSE, 100)),
                      
 ggplot(ml_dat, aes(x = x1, y = x2, color = et)) +
   geom_point()
+
+library(mlr)
+task <- makeClassifTask("example1", data = ml_dat, target = "et")
+
+tree <- makeLearner("classif.rpart", predict.type = "prob")
+rf <- makeLearner("classif.ranger", predict.type = "prob")
+
+benchmark(list(tree, rf), tasks = task, resamplings = makeResampleDesc("CV", iters = 2L),
+          measures = list(auc))
+
+
