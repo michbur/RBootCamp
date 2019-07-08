@@ -27,8 +27,9 @@ task <- makeClassifTask("example1", data = ml_dat, target = "et")
 
 tree <- makeLearner("classif.rpart", predict.type = "prob")
 rf <- makeLearner("classif.ranger", predict.type = "prob")
+svm <- makeLearner("classif.ksvm", predict.type = "prob")
 
-benchmark(list(tree, rf), tasks = task, resamplings = makeResampleDesc("CV", iters = 2L),
+benchmark(list(tree, rf, svm), tasks = task, resamplings = makeResampleDesc("CV", iters = 3L),
           measures = list(auc))
 
 
