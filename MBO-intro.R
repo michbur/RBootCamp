@@ -29,14 +29,6 @@ p <- ggplot(generateHyperParsEffectData(grid_res)[["data"]],
   scale_fill_gradient("AUC", low = "red", high = "blue") +
   theme_bw()
 
-ggplot(generateHyperParsEffectData(very_small_grid_res)[["data"]], 
-       aes(x = C, y = sigma, fill = auc.test.mean, z = auc.test.mean)) +
-  geom_contour() +
-  geom_raster() +
-  scale_fill_gradient("AUC", low = "red", high = "blue") +
-  theme_bw()
-
-
 p
 
 mbo_ctrl <- makeTuneControlMBO(mbo.control = setMBOControlTermination(makeMBOControl(), iters = 20))
