@@ -1,0 +1,1 @@
+# https://www.uniprot.org/uniprot/P01165.fasta
